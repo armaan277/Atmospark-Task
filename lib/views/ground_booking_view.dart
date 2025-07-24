@@ -2,10 +2,42 @@ import 'package:atmospark_task/models/ground_model.dart';
 import 'package:atmospark_task/widgets/book_button.dart';
 import 'package:atmospark_task/widgets/ground_slot_time.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class GroundBookingView extends StatelessWidget {
+class GroundBookingView extends StatefulWidget {
   final Ground ground;
   const GroundBookingView({super.key, required this.ground});
+
+  @override
+  State<GroundBookingView> createState() => _GroundBookingViewState();
+}
+
+class _GroundBookingViewState extends State<GroundBookingView> {
+  DateTime? selectedDate;
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +83,7 @@ class GroundBookingView extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                             child: Text(
-                              ground.name,
+                              widget.ground.name,
                               style: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.bold,
@@ -59,7 +91,7 @@ class GroundBookingView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            ground.location,
+                            widget.ground.location,
                             style: TextStyle(color: Colors.grey),
                           ),
                           SizedBox(height: 8.0),
@@ -73,7 +105,7 @@ class GroundBookingView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(50.0),
                             ),
                             child: Text(
-                              '₹${ground.pricePerHour} / hour',
+                              '₹${widget.ground.pricePerHour} / hour',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 10.0,
@@ -97,7 +129,9 @@ class GroundBookingView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
-                    onTap: () {},
+                    onTap: () {
+                      _selectDate(context);
+                    },
                     child: Card(
                       color: Color(0xffF2F5EC),
                       child: SizedBox(
@@ -114,14 +148,18 @@ class GroundBookingView extends StatelessWidget {
                               child: Icon(Icons.calendar_today, size: 30),
                             ),
                             title: Text(
-                              'Choose Date',
+                              selectedDate == null
+                                  ? 'Choose Date'
+                                  : 'Selected Date',
                               style: TextStyle(
                                 color: Colors.grey.shade700,
                                 fontSize: 13.0,
                               ),
                             ),
                             subtitle: Text(
-                              'Tap to select a date',
+                              selectedDate == null
+                                  ? 'Tap to select a date'
+                                  : DateFormat.yMMMMd().format(selectedDate!),
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -148,8 +186,8 @@ class GroundBookingView extends StatelessWidget {
                 GroundSlotTime(
                   color: Color(0xffF2F5EC),
                   crossAxisCount: 2,
-                  itemCount: ground.availableSlots.length,
-                  timeSlots: ground.availableSlots.map((availableSlot) {
+                  itemCount: widget.ground.availableSlots.length,
+                  timeSlots: widget.ground.availableSlots.map((availableSlot) {
                     return availableSlot;
                   }).toList(),
                 ),
@@ -164,6 +202,7 @@ class GroundBookingView extends StatelessWidget {
                   title: 'Book Now',
                   onPressed: () {},
                   icon: Icons.calendar_today,
+                  isBookingConfirm: selectedDate != null,
                 ),
               ],
             ),

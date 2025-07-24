@@ -171,6 +171,7 @@ class GroundDetailView extends StatelessWidget {
               );
             },
             icon: Icons.calendar_today,
+            isBookingConfirm: true,
           ),
           SizedBox(height: 10.0),
         ],

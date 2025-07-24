@@ -15,6 +15,7 @@ class GroundBookingApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(),
         appBarTheme: AppBarTheme(backgroundColor: Color(0xFF2E7D32)),
         scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF2E7D32))
       ),
     );
   }
