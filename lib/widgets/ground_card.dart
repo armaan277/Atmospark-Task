@@ -15,7 +15,7 @@ class GroundCard extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
-              return GroundDetailView();
+              return GroundDetailView(ground: ground);
             },
           ),
         );
@@ -157,7 +157,7 @@ class GroundCard extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return GroundDetailView();
+                                return GroundDetailView(ground: ground);
                               },
                             ),
                           );

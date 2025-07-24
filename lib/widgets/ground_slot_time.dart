@@ -3,14 +3,22 @@ import 'package:flutter/material.dart';
 class GroundSlotTime extends StatelessWidget {
   final int crossAxisCount;
   final int itemCount;
-  const GroundSlotTime({super.key, required this.crossAxisCount, required this.itemCount});
+  final List<String> timeSlots;
+  final Color color;
+  const GroundSlotTime({
+    super.key,
+    required this.crossAxisCount,
+    required this.itemCount,
+    required this.timeSlots,
+    this.color = const Color(0xffDFE4D9),
+  });
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         childAspectRatio: 2.5,
         crossAxisSpacing: 10,
@@ -19,17 +27,17 @@ class GroundSlotTime extends StatelessWidget {
       itemCount: itemCount,
       itemBuilder: (context, index) {
         return Card(
-          color: Color(0xffDFE4D9),
+          color: color,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.access_time, size: 16.0),
                 SizedBox(width: 5.0),
-                Text('10:00 AM', style: TextStyle(fontWeight: FontWeight.w600)),
+                Text(timeSlots[index], style: TextStyle(fontWeight: FontWeight.w600)),
               ],
             ),
           ),

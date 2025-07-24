@@ -1,10 +1,12 @@
+import 'package:atmospark_task/models/ground_model.dart';
 import 'package:atmospark_task/views/ground_booking_view.dart';
 import 'package:atmospark_task/widgets/book_button.dart';
 import 'package:atmospark_task/widgets/ground_slot_time.dart';
 import 'package:flutter/material.dart';
 
 class GroundDetailView extends StatelessWidget {
-  const GroundDetailView({super.key});
+  final Ground ground;
+  const GroundDetailView({super.key, required this.ground});
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +44,18 @@ class GroundDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Sunset Turf',
+                            ground.name,
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 22,
                               fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Icon(
                                 Icons.location_on,
@@ -59,7 +64,7 @@ class GroundDetailView extends StatelessWidget {
                               ),
                               SizedBox(width: 5),
                               Text(
-                                '123 Green Lane',
+                                ground.location,
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 16,
@@ -78,7 +83,7 @@ class GroundDetailView extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              '₹200',
+                              '₹${ground.pricePerHour}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -108,7 +113,7 @@ class GroundDetailView extends StatelessWidget {
                           Icon(Icons.star, color: Colors.amber, size: 14),
                           SizedBox(width: 5),
                           Text(
-                            '4.8 Rating',
+                            '${ground.rating} Rating',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 12,
@@ -128,7 +133,7 @@ class GroundDetailView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Text(
-                        'Football',
+                        ground.category,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 12,
@@ -140,10 +145,16 @@ class GroundDetailView extends StatelessWidget {
                 SizedBox(height: 25.0),
                 Text(
                   'Available Time Slots',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20.0),
-                GroundSlotTime(crossAxisCount: 3, itemCount: 5),
+                GroundSlotTime(
+                  crossAxisCount: 3,
+                  itemCount: ground.availableSlots.length,
+                  timeSlots: ground.availableSlots.map((availableSlot) {
+                    return availableSlot;
+                  }).toList(),
+                ),
               ],
             ),
           ),
@@ -154,7 +165,7 @@ class GroundDetailView extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return GroundBookingView();
+                    return GroundBookingView(ground: ground);
                   },
                 ),
               );
