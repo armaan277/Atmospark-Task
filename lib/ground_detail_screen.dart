@@ -1,3 +1,4 @@
+import 'package:atmospark_task/ground_booking_screen.dart';
 import 'package:flutter/material.dart';
 
 class GroundDetailScreen extends StatelessWidget {
@@ -177,7 +178,15 @@ class GroundDetailScreen extends StatelessWidget {
               horizontal: 10.0,
             ),
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return GroundBookingScreen();
+                    },
+                  ),
+                );
+              },
               label: Text(
                 'Book Now',
                 style: TextStyle(color: Colors.white, fontSize: 16),
