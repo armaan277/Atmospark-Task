@@ -23,7 +23,7 @@ class GroundCard extends StatelessWidget {
       child: Container(
         height: 380,
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color: Color(0xffF2F5EC),
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Column(
@@ -37,10 +37,9 @@ class GroundCard extends StatelessWidget {
                       topLeft: Radius.circular(12.0),
                       topRight: Radius.circular(12.0),
                     ),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Color(0xFFDDE2DA), Color(0xFFA3A7A0)],
+                    image: DecorationImage(
+                      image: NetworkImage(ground.imageUrl),
+                      fit: BoxFit.cover,
                     ),
                   ),
                   child: Align(
@@ -101,13 +100,17 @@ class GroundCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        GroundViewModel.grounds[index].name,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Text(
+                          GroundViewModel.grounds[index].name,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      SizedBox(width: 10.0),
                       Container(
                         padding: EdgeInsets.symmetric(
                           vertical: 8.0,

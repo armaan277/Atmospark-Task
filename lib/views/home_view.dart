@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.separated(
-                separatorBuilder: (context, index) => SizedBox(height: 10.0),
+                separatorBuilder: (context, index) => SizedBox(height: 15.0),
                 itemCount: GroundViewModel.grounds.length,
                 itemBuilder: (context, index) {
                   final ground = GroundViewModel.grounds[index];

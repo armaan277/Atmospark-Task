@@ -1,5 +1,8 @@
 import 'package:atmospark_task/models/ground_model.dart';
+import 'package:atmospark_task/utils/custom_toast.dart';
+import 'package:atmospark_task/utils/utilities.dart';
 import 'package:atmospark_task/widgets/book_button.dart';
+import 'package:atmospark_task/widgets/booking_detail.dart';
 import 'package:atmospark_task/widgets/ground_slot_time.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,24 +17,10 @@ class GroundBookingView extends StatefulWidget {
 
 class _GroundBookingViewState extends State<GroundBookingView> {
   DateTime? selectedDate;
+  int? selectedSlotIndex;
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 30)),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: Theme.of(context).colorScheme.primary,
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
+  void _selectDate(BuildContext context) async {
+    final picked = await selectDateFromPicker(context);
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
@@ -72,47 +61,53 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                         height: 90,
                         width: 90,
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
+                          image: DecorationImage(
+                            image: NetworkImage(widget.ground.imageUrl),
+                            fit: BoxFit.cover,
+                          ),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
                       SizedBox(width: 8.0),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: Text(
-                              widget.ground.name,
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Text(
+                                widget.ground.name,
+                                style: TextStyle(
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          ),
-                          Text(
-                            widget.ground.location,
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          SizedBox(height: 8.0),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 4.0,
-                              horizontal: 8.0,
+                            Text(
+                              widget.ground.location,
+                              style: TextStyle(color: Colors.grey),
                             ),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFbfe2b9),
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                            child: Text(
-                              '₹${widget.ground.pricePerHour} / hour',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 10.0,
+                            SizedBox(height: 8.0),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 4.0,
+                                horizontal: 8.0,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFbfe2b9),
+                                borderRadius: BorderRadius.circular(50.0),
+                              ),
+                              child: Text(
+                                '₹${widget.ground.pricePerHour} / hour',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 10.0,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -184,12 +179,15 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                   ),
                 ),
                 GroundSlotTime(
-                  color: Color(0xffF2F5EC),
                   crossAxisCount: 2,
                   itemCount: widget.ground.availableSlots.length,
-                  timeSlots: widget.ground.availableSlots.map((availableSlot) {
-                    return availableSlot;
-                  }).toList(),
+                  timeSlots: widget.ground.availableSlots,
+                  selectedIndex: selectedSlotIndex,
+                  onTap: (index) {
+                    setState(() {
+                      selectedSlotIndex = index;
+                    });
+                  },
                 ),
               ],
             ),
@@ -200,9 +198,81 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                 Spacer(),
                 BookButton(
                   title: 'Book Now',
-                  onPressed: () {},
+                  onPressed: selectedDate != null && selectedSlotIndex != null
+                      ? () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              title: Row(
+                                children: [
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: Colors.green[600],
+                                    size: 26,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  const Text(
+                                    'Booking Confirmed!',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Your booking details:'),
+                                  const SizedBox(height: 12),
+                                  BookingDetail(
+                                    icon: Icons.sports_soccer,
+                                    label: 'Ground',
+                                    value: widget.ground.name,
+                                  ),
+                                  BookingDetail(
+                                    icon: Icons.calendar_today,
+                                    label: 'Date',
+                                    value: DateFormat.yMMMd().format(
+                                      selectedDate!,
+                                    ),
+                                  ),
+                                  BookingDetail(
+                                    icon: Icons.access_time,
+                                    label: 'Time',
+                                    value: widget
+                                        .ground
+                                        .availableSlots[selectedSlotIndex!],
+                                  ),
+                                  BookingDetail(
+                                    icon: Icons.currency_rupee,
+                                    label: 'Amount',
+                                    value:
+                                        '₹${widget.ground.pricePerHour.toInt()}',
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Done'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      : () {
+                          CustomToast.showCustomToast(
+                            context,
+                            message: 'Please select date and slot',
+                          );
+                        },
                   icon: Icons.calendar_today,
-                  isBookingConfirm: selectedDate != null,
+                  isBookingConfirm:
+                      selectedDate != null && selectedSlotIndex != null,
                 ),
               ],
             ),

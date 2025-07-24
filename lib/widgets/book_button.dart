@@ -35,7 +35,7 @@ class BookButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: isBookingConfirm == true
               ? Color(0xFF2E7D32)
-              : Colors.grey.shade300,
+              : Color(0xffF2F5EC),
           minimumSize: const Size(double.infinity, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

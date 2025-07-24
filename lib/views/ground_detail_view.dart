@@ -26,10 +26,9 @@ class GroundDetailView extends StatelessWidget {
           Container(
             height: 300,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color(0xFFDDE2DA), Color(0xFFA3A7A0)],
+              image: DecorationImage(
+                image: NetworkImage(ground.imageUrl),
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -43,37 +42,40 @@ class GroundDetailView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            ground.name,
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              overflow: TextOverflow.ellipsis,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              ground.name,
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.location_on,
-                                color: Color(0xFF2E7D32),
-                                size: 18,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                ground.location,
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 16,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Color(0xFF2E7D32),
+                                  size: 18,
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                                SizedBox(width: 5),
+                                Text(
+                                  ground.location,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
+                      SizedBox(width: 12.0),
                       Container(
                         padding: EdgeInsets.all(12.0),
                         decoration: BoxDecoration(
