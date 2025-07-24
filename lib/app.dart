@@ -1,4 +1,4 @@
-import 'package:atmospark_task/home_screen.dart';
+import 'package:atmospark_task/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,7 +10,7 @@ class GroundBookingApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ground Booking App',
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: HomeView(),
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
         appBarTheme: AppBarTheme(backgroundColor: Color(0xFF2E7D32)),

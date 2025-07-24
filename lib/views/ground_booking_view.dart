@@ -1,7 +1,9 @@
+import 'package:atmospark_task/widgets/book_button.dart';
+import 'package:atmospark_task/widgets/ground_slot_time.dart';
 import 'package:flutter/material.dart';
 
-class GroundBookingScreen extends StatelessWidget {
-  const GroundBookingScreen({super.key});
+class GroundBookingView extends StatelessWidget {
+  const GroundBookingView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,6 @@ class GroundBookingScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
               child: Text(
@@ -81,33 +82,46 @@ class GroundBookingScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            Card(
-              color: Color(0xffF2F5EC),
-              child: SizedBox(
-                height: 100,
-                child: Center(
-                  child: ListTile(
-                    leading: Container(
-                      height: 70,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFbfe2b9),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Icon(Icons.calendar_today, size: 30),
-                    ),
-                    title: Text(
-                      'Choose Date',
-                      style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontSize: 13.0,
-                      ),
-                    ),
-                    subtitle: Text(
-                      'Tap to select a date',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+            Material(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(10),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () {},
+                child: Card(
+                  color: Color(0xffF2F5EC),
+                  child: SizedBox(
+                    height: 100,
+                    child: Center(
+                      child: ListTile(
+                        leading: Container(
+                          height: 70,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFbfe2b9),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Icon(Icons.calendar_today, size: 30),
+                        ),
+                        title: Text(
+                          'Choose Date',
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontSize: 13.0,
+                          ),
+                        ),
+                        subtitle: Text(
+                          'Tap to select a date',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                   ),
@@ -121,53 +135,12 @@ class GroundBookingScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 2.5,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: Color(0xffF2F5EC),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.access_time, size: 16.0),
-                        SizedBox(width: 5.0),
-                        Text(
-                          '10:00 AM',
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+            GroundSlotTime(crossAxisCount: 2, itemCount: 5),
             Spacer(),
-            ElevatedButton.icon(
+            BookButton(
+              title: 'Book Now',
               onPressed: () {},
-              label: Text(
-                'Book Now',
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-              icon: Icon(Icons.calendar_today, size: 20, color: Colors.white),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF2E7D32),
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+              icon: Icons.calendar_today,
             ),
             SizedBox(height: 10.0),
           ],

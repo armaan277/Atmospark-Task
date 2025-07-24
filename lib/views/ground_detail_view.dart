@@ -1,8 +1,10 @@
-import 'package:atmospark_task/ground_booking_screen.dart';
+import 'package:atmospark_task/views/ground_booking_view.dart';
+import 'package:atmospark_task/widgets/book_button.dart';
+import 'package:atmospark_task/widgets/ground_slot_time.dart';
 import 'package:flutter/material.dart';
 
-class GroundDetailScreen extends StatelessWidget {
-  const GroundDetailScreen({super.key});
+class GroundDetailView extends StatelessWidget {
+  const GroundDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class GroundDetailScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -141,66 +143,25 @@ class GroundDetailScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20.0),
-                Wrap(
-                  spacing: 12.0,
-                  runSpacing: 10.0,
-                  children: List.generate(5, (index) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 12.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xffDFE4D9),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.access_time, size: 16.0),
-                          SizedBox(width: 5.0),
-                          Text(
-                            '10:00 AM',
-                            style: TextStyle(fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
+                GroundSlotTime(crossAxisCount: 3, itemCount: 5),
               ],
             ),
           ),
           Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 12.0,
-              horizontal: 10.0,
-            ),
-            child: ElevatedButton.icon(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return GroundBookingScreen();
-                    },
-                  ),
-                );
-              },
-              label: Text(
-                'Book Now',
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-              icon: Icon(Icons.calendar_today, size: 20, color: Colors.white),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF2E7D32),
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+          BookButton(
+            title: 'Book Now',
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return GroundBookingView();
+                  },
                 ),
-              ),
-            ),
+              );
+            },
+            icon: Icons.calendar_today,
           ),
+          SizedBox(height: 10.0),
         ],
       ),
     );
