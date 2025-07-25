@@ -1,3 +1,4 @@
+import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class GroundSlotTime extends StatelessWidget {
@@ -31,16 +32,16 @@ class GroundSlotTime extends StatelessWidget {
       itemBuilder: (context, index) {
         final isSelected = selectedIndex == index;
         return Material(
-          color: Colors.transparent,
+          color: AppColors.appTransparentColor,
           borderRadius: BorderRadius.circular(10),
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: () => onTap?.call(index),
             child: Container(
               decoration: BoxDecoration(
-                color: isSelected ? Colors.green.shade100 : Color(0xffF2F5EC),
+                color: isSelected ? AppColors.appGreen100Color : AppColors.appOfLightGreenColor,
                 border: Border.all(
-                  color: isSelected ? Color(0xFF2E7D32) : Colors.transparent,
+                  color: isSelected ? AppColors.appDarkGreenColor : AppColors.appTransparentColor,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(10),
@@ -54,7 +55,7 @@ class GroundSlotTime extends StatelessWidget {
                     timeSlots[index],
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: isSelected ? Color(0xFF2E7D32) : Colors.black,
+                      color: isSelected ? AppColors.appDarkGreenColor : AppColors.appGray700Color,
                     ),
                   ),
                 ],

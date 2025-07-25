@@ -1,3 +1,4 @@
+import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BookButton extends StatelessWidget {
@@ -23,7 +24,7 @@ class BookButton extends StatelessWidget {
         label: Text(
           title,
           style: TextStyle(
-            color: isBookingConfirm == true ? Colors.white : Colors.black,
+            color: isBookingConfirm == true ? AppColors.appWhiteColor : AppColors.appBlackColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -31,12 +32,12 @@ class BookButton extends StatelessWidget {
         icon: Icon(
           icon,
           size: 20,
-          color: isBookingConfirm == true ? Colors.white : Colors.black,
+          color: isBookingConfirm == true ? AppColors.appWhiteColor : AppColors.appBlackColor,
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: isBookingConfirm == true
-              ? Color(0xFF2E7D32)
-              : Color(0xffF2F5EC),
+              ? AppColors.appDarkGreenColor
+              : AppColors.appOfLightGreenColor,
           minimumSize: const Size(double.infinity, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

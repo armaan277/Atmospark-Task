@@ -1,3 +1,4 @@
+import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:atmospark_task/routes/app_router.dart';
 import 'package:atmospark_task/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,10 @@ class GroundBookingApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
-        appBarTheme: AppBarTheme(backgroundColor: Color(0xFF2E7D32)),
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF2E7D32)),
+        appBarTheme: AppBarTheme(backgroundColor: AppColors.appDarkGreenColor),
+        scaffoldBackgroundColor: AppColors.appWhiteColor,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.appDarkGreenColor,
+        ),
       ),
       initialRoute: Routes.homeView,
       routes: AppRouter.routes,

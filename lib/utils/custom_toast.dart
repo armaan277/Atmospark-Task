@@ -1,3 +1,4 @@
+import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomToast {
@@ -9,11 +10,11 @@ class CustomToast {
         left: 20,
         right: 20,
         child: Material(
-          color: Colors.transparent,
+          color: AppColors.appTransparentColor,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFF2E7D32),
+              color: AppColors.appDarkGreenColor,
               borderRadius: BorderRadius.circular(4),
               boxShadow: const [
                 BoxShadow(
@@ -27,7 +28,7 @@ class CustomToast {
               message,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
+                color: AppColors.appWhiteColor,
                 letterSpacing: 1.1,
                 fontSize: 15,
               ),

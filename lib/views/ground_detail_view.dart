@@ -1,3 +1,4 @@
+import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:atmospark_task/models/ground_model.dart';
 import 'package:atmospark_task/routes/routes.dart';
 import 'package:atmospark_task/widgets/book_button.dart';
@@ -16,170 +17,175 @@ class GroundDetailView extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: AppColors.appWhiteColor),
         ),
         centerTitle: true,
-        title: Text('Ground Detail', style: TextStyle(color: Colors.white)),
+        title: Text(
+          'Ground Detail',
+          style: TextStyle(color: AppColors.appWhiteColor),
+        ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 300,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(ground.imageUrl),
-                  fit: BoxFit.cover,
-                ),
+      body: Column(
+        children: [
+          Container(
+            height: 300,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(ground.imageUrl),
+                fit: BoxFit.cover,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 10,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12.0, bottom: 25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                ground.name,
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.location_on,
-                                    color: Color(0xFF2E7D32),
-                                    size: 18,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    ground.location,
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 12.0),
-                        Container(
-                          padding: EdgeInsets.all(12.0),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFbfe2b9),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                '₹${ground.pricePerHour}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text('per hour', style: TextStyle(fontSize: 10)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12.0,
+              vertical: 10,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0, bottom: 25.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 8.0,
-                          horizontal: 12.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0xffD6E8C6),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(Icons.star, color: Colors.amber, size: 14),
-                            SizedBox(width: 5),
                             Text(
-                              '${ground.rating} Rating',
+                              ground.name,
                               style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
                               ),
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: AppColors.appDarkGreenColor,
+                                  size: 18,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  ground.location,
+                                  style: TextStyle(
+                                    color: AppColors.appGrayColor,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(width: 10.0),
+                      SizedBox(width: 12.0),
                       Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 8.0,
-                          horizontal: 12.0,
-                        ),
+                        padding: EdgeInsets.all(12.0),
                         decoration: BoxDecoration(
-                          color: Color(0xffBBECF0),
-                          borderRadius: BorderRadius.circular(20.0),
+                          color: AppColors.appLightGreenColor,
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
-                        child: Text(
-                          ground.category,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                          ),
+                        child: Column(
+                          children: [
+                            Text(
+                              '₹${ground.pricePerHour}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Text('per hour', style: TextStyle(fontSize: 10)),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 25.0),
-                  Text(
-                    'Available Time Slots',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 20.0),
-                  GroundSlotTime(
-                    crossAxisCount: 3,
-                    itemCount: ground.availableSlots.length,
-                    timeSlots: ground.availableSlots.map((availableSlot) {
-                      return availableSlot;
-                    }).toList(),
-                  ),
-                ],
-              ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 12.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.appPastelGreenColor,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.star,
+                            color: AppColors.appGoldColor,
+                            size: 14,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            '${ground.rating} Rating',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 10.0),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 12.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.appAquaBlueColor,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Text(
+                        ground.category,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 25.0),
+                Text(
+                  'Available Time Slots',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                GroundSlotTime(
+                  crossAxisCount: 3,
+                  itemCount: ground.availableSlots.length,
+                  timeSlots: ground.availableSlots.map((availableSlot) {
+                    return availableSlot;
+                  }).toList(),
+                ),
+              ],
             ),
-            // Spacer(),
-            BookButton(
-              title: 'Book Now',
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '${Routes.groundDetailView}${Routes.groundBookingView}',
-                  arguments: ground,
-                );
-              },
-              icon: Icons.calendar_today,
-              isBookingConfirm: true,
-            ),
-            SizedBox(height: 10.0),
-          ],
-        ),
+          ),
+          Spacer(),
+          BookButton(
+            title: 'Book Now',
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '${Routes.groundDetailView}${Routes.groundBookingView}',
+                arguments: ground,
+              );
+            },
+            icon: Icons.calendar_today,
+            isBookingConfirm: true,
+          ),
+          SizedBox(height: 10.0),
+        ],
       ),
     );
   }

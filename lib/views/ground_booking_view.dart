@@ -1,3 +1,4 @@
+import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:atmospark_task/models/ground_model.dart';
 import 'package:atmospark_task/utils/custom_toast.dart';
 import 'package:atmospark_task/utils/utilities.dart';
@@ -37,10 +38,10 @@ class _GroundBookingViewState extends State<GroundBookingView> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: AppColors.appWhiteColor),
         ),
         centerTitle: true,
-        title: Text('Book Your Slot', style: TextStyle(color: Colors.white)),
+        title: Text('Book Your Slot', style: TextStyle(color: AppColors.appWhiteColor)),
       ),
       body: Column(
         children: [
@@ -53,7 +54,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Card(
-                  color: Color(0xffF2F5EC),
+                  color: AppColors.appOfLightGreenColor,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -87,7 +88,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                             ),
                             Text(
                               ground.location,
-                              style: TextStyle(color: Colors.grey),
+                              style: TextStyle(color: AppColors.appGrayColor),
                             ),
                             SizedBox(height: 8.0),
                             Container(
@@ -96,7 +97,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                                 horizontal: 8.0,
                               ),
                               decoration: BoxDecoration(
-                                color: Color(0xFFbfe2b9),
+                                color: AppColors.appLightGreenColor,
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                               child: Text(
@@ -121,7 +122,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                   ),
                 ),
                 Material(
-                  color: Colors.transparent,
+                  color: AppColors.appTransparentColor,
                   borderRadius: BorderRadius.circular(10),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
@@ -129,7 +130,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                       _selectDate(context);
                     },
                     child: Card(
-                      color: Color(0xffF2F5EC),
+                      color: AppColors.appOfLightGreenColor,
                       child: SizedBox(
                         height: 100,
                         child: Center(
@@ -138,7 +139,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                               height: 70,
                               width: 60,
                               decoration: BoxDecoration(
-                                color: Color(0xFFbfe2b9),
+                                color: AppColors.appLightGreenColor,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Icon(Icons.calendar_today, size: 30),
@@ -148,7 +149,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                                   ? 'Choose Date'
                                   : 'Selected Date',
                               style: TextStyle(
-                                color: Colors.grey.shade700,
+                                color: AppColors.appGray700Color,
                                 fontSize: 13.0,
                               ),
                             ),
@@ -164,7 +165,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                             trailing: Icon(
                               Icons.arrow_forward_ios,
                               size: 20,
-                              color: Colors.grey,
+                              color: AppColors.appGrayColor,
                             ),
                           ),
                         ),
@@ -211,7 +212,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                                 children: [
                                   Icon(
                                     Icons.check_circle,
-                                    color: Colors.green[600],
+                                    color: AppColors.appDarkGreenColor,
                                     size: 26,
                                   ),
                                   const SizedBox(width: 12),
@@ -266,7 +267,8 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                       : () {
                           CustomToast.showCustomToast(
                             context,
-                            message: 'Please select date and slot',
+                            message:selectedSlotIndex != null ? 'Please select date' :  selectedDate != null
+                                ? 'Please select slot' : 'Please select date and slot',
                           );
                         },
                   icon: Icons.calendar_today,

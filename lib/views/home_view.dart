@@ -1,3 +1,4 @@
+import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:atmospark_task/view_models/ground_view_model.dart';
 import 'package:atmospark_task/widgets/ground_card.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Sports Grounds', style: TextStyle(color: Colors.white)),
+        title: Text('Sports Grounds', style: TextStyle(color: AppColors.appWhiteColor)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
@@ -24,7 +25,7 @@ class HomeView extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               'Book premium sports facilities near you',
-              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600),
+              style: TextStyle(color: AppColors.appGrayColor, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 20),
             Expanded(

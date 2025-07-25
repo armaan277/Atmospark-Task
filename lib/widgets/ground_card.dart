@@ -1,3 +1,4 @@
+import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:atmospark_task/models/ground_model.dart';
 import 'package:atmospark_task/routes/routes.dart';
 import 'package:atmospark_task/view_models/ground_view_model.dart';
@@ -21,7 +22,7 @@ class GroundCard extends StatelessWidget {
       child: Container(
         height: 380,
         decoration: BoxDecoration(
-          color: Color(0xffF2F5EC),
+          color: AppColors.appOfLightGreenColor,
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Column(
@@ -49,18 +50,18 @@ class GroundCard extends StatelessWidget {
                         horizontal: 8.0,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.6),
+                        color: AppColors.appBlackColor.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.star, color: Colors.yellow, size: 14),
+                          Icon(Icons.star, color: AppColors.appGoldColor, size: 14),
                           SizedBox(width: 4),
                           Text(
                             '${GroundViewModel.grounds[index].rating}',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.appWhiteColor,
                               fontWeight: FontWeight.w500,
                               fontSize: 12,
                             ),
@@ -79,12 +80,13 @@ class GroundCard extends StatelessWidget {
                       horizontal: 8.0,
                     ),
                     decoration: BoxDecoration(
-                      color: Color(0xFF2E7D32),
+                      color: AppColors.appDarkGreenColor,
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: Text(
                       ground.category,
-                      style: TextStyle(fontSize: 12, color: Colors.white),
+                      style: TextStyle(fontSize: 12, color: AppColors.appWhiteColor,
+                      ),
                     ),
                   ),
                 ),
@@ -115,7 +117,7 @@ class GroundCard extends StatelessWidget {
                           horizontal: 10.0,
                         ),
                         decoration: BoxDecoration(
-                          color: Color(0xFFbfe2b9),
+                          color: AppColors.appLightGreenColor,
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Text(
@@ -129,13 +131,13 @@ class GroundCard extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.location_on_outlined,
-                        color: Colors.grey,
+                        color: AppColors.appGrayColor,
                         size: 18,
                       ),
                       SizedBox(width: 5),
                       Text(
                         ground.location,
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(color: AppColors.appGrayColor, fontSize: 16),
                       ),
                     ],
                   ),
@@ -145,11 +147,11 @@ class GroundCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.access_time, color: Colors.grey, size: 18),
+                          Icon(Icons.access_time, color: AppColors.appGrayColor, size: 18),
                           SizedBox(width: 5),
                           Text(
                             '${ground.availableSlots.length} slots available',
-                            style: TextStyle(color: Colors.grey, fontSize: 14),
+                            style: TextStyle(color: AppColors.appGrayColor, fontSize: 14),
                           ),
                         ],
                       ),
@@ -163,13 +165,13 @@ class GroundCard extends StatelessWidget {
                         },
                         icon: const Icon(
                           Icons.arrow_right_alt,
-                          color: Colors.green,
+                          color: AppColors.appDarkGreenColor,
                           size: 20,
                         ),
                         label: const Text(
                           'View Details',
                           style: TextStyle(
-                            color: Colors.green,
+                            color: AppColors.appDarkGreenColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                           ),
@@ -178,11 +180,9 @@ class GroundCard extends StatelessWidget {
                           overlayColor: WidgetStateProperty.resolveWith<Color?>(
                             (states) {
                               if (states.contains(WidgetState.pressed)) {
-                                return const Color(
-                                  0xFF2E7D32,
-                                ).withValues(alpha: 0.3);
+                                return AppColors.appDarkGreenColor.withValues(alpha: 0.3);
                               }
-                              return Colors.transparent;
+                              return AppColors.appTransparentColor;
                             },
                           ),
                           splashFactory: NoSplash.splashFactory,
