@@ -64,7 +64,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                         width: 90,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(ground.imageUrl),
+                            image: NetworkImage(ground.imageUrl.first),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(10.0),

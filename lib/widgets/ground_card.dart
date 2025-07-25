@@ -37,7 +37,7 @@ class GroundCard extends StatelessWidget {
                       topRight: Radius.circular(12.0),
                     ),
                     image: DecorationImage(
-                      image: NetworkImage(ground.imageUrl),
+                      image: NetworkImage(ground.imageUrl.first),
                       fit: BoxFit.cover,
                     ),
                   ),

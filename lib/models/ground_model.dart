@@ -2,7 +2,7 @@ class Ground {
   final String id;
   final String name;
   final String location;
-  final String imageUrl;
+  final List<String> imageUrl;
   final double pricePerHour;
   final List<String> availableSlots;
   final double rating;

@@ -3,10 +3,19 @@ import 'package:atmospark_task/models/ground_model.dart';
 import 'package:atmospark_task/routes/routes.dart';
 import 'package:atmospark_task/widgets/book_button.dart';
 import 'package:atmospark_task/widgets/ground_slot_time.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class GroundDetailView extends StatelessWidget {
+class GroundDetailView extends StatefulWidget {
   const GroundDetailView({super.key});
+
+  @override
+  State<GroundDetailView> createState() => _GroundDetailViewState();
+}
+
+class _GroundDetailViewState extends State<GroundDetailView> {
+  final carouselController = CarouselSliderController();
+   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +36,53 @@ class GroundDetailView extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            height: 300,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(ground.imageUrl),
-                fit: BoxFit.cover,
+          Stack(
+            children: [
+              CarouselSlider(
+                items: ground.imageUrl.map((image) {
+                  return Image.network(
+                    image,
+                    height: 250,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  );
+                }).toList(),
+                options: CarouselOptions(
+                  autoPlayInterval: Duration(seconds: 2),
+                  height: 250,
+                  viewportFraction: 1.0,
+                  autoPlay: ground.imageUrl.length > 1 ? true : false,
+                  enlargeCenterPage: false,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                ),
+                carouselController: carouselController,
               ),
-            ),
+              Positioned(
+                bottom: 5,
+                left: 0,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: ground.imageUrl.asMap().entries.map((entry) {
+                    return Container(
+                      width: currentIndex == entry.key ? 16.0 : 8.0,
+                      height: 8.0,
+                      margin: EdgeInsets.symmetric(horizontal: 4.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
+                        color: currentIndex == entry.key
+                            ? AppColors.appWhiteColor
+                            : AppColors.appWhiteColor.withValues(alpha: 0.5),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
