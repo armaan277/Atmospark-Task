@@ -1,5 +1,6 @@
 import 'package:atmospark_task/constants/app_colors/app_colors.dart';
 import 'package:atmospark_task/models/ground_model.dart';
+import 'package:atmospark_task/routes/routes.dart';
 import 'package:atmospark_task/utils/custom_toast.dart';
 import 'package:atmospark_task/utils/utilities.dart';
 import 'package:atmospark_task/widgets/book_button.dart';
@@ -257,6 +258,10 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                                 TextButton(
                                   onPressed: () {
                                     Navigator.pop(context);
+                                    Navigator.popUntil(
+                                      context,
+                                      ModalRoute.withName(Routes.homeView),
+                                    );
                                   },
                                   child: const Text('Done'),
                                 ),
