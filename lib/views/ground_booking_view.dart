@@ -30,6 +30,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
 
   @override
   Widget build(BuildContext context) {
+    final ground = ModalRoute.of(context)!.settings.arguments as Ground;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -62,7 +63,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                         width: 90,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(widget.ground.imageUrl),
+                            image: NetworkImage(ground.imageUrl),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(10.0),
@@ -76,7 +77,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
                               child: Text(
-                                widget.ground.name,
+                                ground.name,
                                 style: TextStyle(
                                   fontSize: 22.0,
                                   fontWeight: FontWeight.bold,
@@ -85,7 +86,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                               ),
                             ),
                             Text(
-                              widget.ground.location,
+                              ground.location,
                               style: TextStyle(color: Colors.grey),
                             ),
                             SizedBox(height: 8.0),
@@ -99,7 +100,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                               child: Text(
-                                '₹${widget.ground.pricePerHour} / hour',
+                                '₹${ground.pricePerHour} / hour',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 10.0,
@@ -180,8 +181,8 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                 ),
                 GroundSlotTime(
                   crossAxisCount: 2,
-                  itemCount: widget.ground.availableSlots.length,
-                  timeSlots: widget.ground.availableSlots,
+                  itemCount: ground.availableSlots.length,
+                  timeSlots: ground.availableSlots,
                   selectedIndex: selectedSlotIndex,
                   onTap: (index) {
                     setState(() {
@@ -229,7 +230,7 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                                   BookingDetail(
                                     icon: Icons.sports_soccer,
                                     label: 'Ground',
-                                    value: widget.ground.name,
+                                    value: ground.name,
                                   ),
                                   BookingDetail(
                                     icon: Icons.calendar_today,
@@ -241,15 +242,13 @@ class _GroundBookingViewState extends State<GroundBookingView> {
                                   BookingDetail(
                                     icon: Icons.access_time,
                                     label: 'Time',
-                                    value: widget
-                                        .ground
+                                    value: ground
                                         .availableSlots[selectedSlotIndex!],
                                   ),
                                   BookingDetail(
                                     icon: Icons.currency_rupee,
                                     label: 'Amount',
-                                    value:
-                                        '₹${widget.ground.pricePerHour.toInt()}',
+                                    value: '₹${ground.pricePerHour.toInt()}',
                                   ),
                                 ],
                               ),

@@ -1,4 +1,5 @@
-import 'package:atmospark_task/views/home_view.dart';
+import 'package:atmospark_task/routes/app_router.dart';
+import 'package:atmospark_task/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,13 +11,14 @@ class GroundBookingApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ground Booking App',
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
         appBarTheme: AppBarTheme(backgroundColor: Color(0xFF2E7D32)),
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF2E7D32)),
       ),
+      initialRoute: Routes.homeView,
+      routes: AppRouter.routes,
     );
   }
 }

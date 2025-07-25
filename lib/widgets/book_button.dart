@@ -5,6 +5,7 @@ class BookButton extends StatelessWidget {
   final VoidCallback onPressed;
   final IconData icon;
   final bool? isBookingConfirm;
+
   const BookButton({
     super.key,
     required this.onPressed,

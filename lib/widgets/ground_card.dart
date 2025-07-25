@@ -1,6 +1,6 @@
 import 'package:atmospark_task/models/ground_model.dart';
+import 'package:atmospark_task/routes/routes.dart';
 import 'package:atmospark_task/view_models/ground_view_model.dart';
-import 'package:atmospark_task/views/ground_detail_view.dart';
 import 'package:flutter/material.dart';
 
 class GroundCard extends StatelessWidget {
@@ -12,12 +12,10 @@ class GroundCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              return GroundDetailView(ground: ground);
-            },
-          ),
+        Navigator.pushNamed(
+          context,
+          Routes.groundDetailView,
+          arguments: ground,
         );
       },
       child: Container(
@@ -157,12 +155,10 @@ class GroundCard extends StatelessWidget {
                       ),
                       TextButton.icon(
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return GroundDetailView(ground: ground);
-                              },
-                            ),
+                          Navigator.pushNamed(
+                            context,
+                            Routes.groundDetailView,
+                            arguments: ground,
                           );
                         },
                         icon: const Icon(
